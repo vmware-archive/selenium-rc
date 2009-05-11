@@ -14,12 +14,14 @@ begin
     s.description = "The Selenium RC Server packaged as a gem"
     s.authors = ["Pivotal Labs", "Chad Woolley", "Brian Takita"]
     s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec,vendor}/**/*"]
-    s.extensions << 'extconf.rb'    
+    s.extensions << 'Rakefile'
 #    s.add_dependency ''
   end
 rescue LoadError
   puts "Jeweler, or one of its dependencies, is not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
+
+task :default => [:download_jar_file]
 
 desc "Downloads and installs the SeleniumRC jar file from openqa"
 task :download_jar_file do
@@ -32,9 +34,14 @@ task :download_jar_file do
   FileUtils.mkdir_p(download_dir)
   download_path = "#{download_dir}/#{File.basename(jar_url)}"
 
-  system("wget #{jar_url} -O #{download_path}") || raise("Downloading #{jar_url} failed")
+  run = lambda do |cmd, error_msg|
+    puts "Running: #{cmd}"
+    system(cmd) || raise(error_msg)
+  end
+
+  run.call("wget #{jar_url} -O #{download_path}", "Downloading #{jar_url} failed")
   Dir.chdir(File.dirname(download_path)) do
-    system("unzip #{download_path}") || raise("Unzipping #{download_path} failed")
-    system("cp $(find . | grep selenium-server.jar) #{project_dir}/vendor")
+    run.call("unzip #{download_path}", "Unzipping #{download_path} failed")
+    run.call("cp $(find . | grep selenium-server.jar) #{project_dir}/vendor", "Copying the selenium-server.jar failed")
   end
 end
