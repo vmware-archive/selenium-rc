@@ -15,7 +15,7 @@ begin
     s.homepage = "http://github.com/pivotal/selenium-rc"
     s.description = "The Selenium RC Server packaged as a gem"
     s.authors = ["Pivotal Labs", "Nate Clark", "Brian Takita", "Chad Woolley"]
-    s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec,vendor}/**/*"]
+    s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec}/**/*", "vendor/empty.txt"]
     s.extensions << 'Rakefile'
     s.add_dependency "rubyzip"
   end
