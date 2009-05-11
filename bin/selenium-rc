@@ -1,1 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env ruby
+
+dir = File.dirname(__FILE__)
+require "rubygems"
+require File.expand_path("#{dir}/../lib/selenium_rc")
+SeleniumRC::Server.boot

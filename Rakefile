@@ -1,6 +1,5 @@
 require "rubygems"
 require "tmpdir"
-require "open-uri"
 require "fileutils"
 
 begin
@@ -12,7 +11,7 @@ begin
     s.email = "pivotallabsopensource@googlegroups.com"
     s.homepage = "http://github.com/pivotal/selenium-rc"
     s.description = "The Selenium RC Server packaged as a gem"
-    s.authors = ["Pivotal Labs", "Chad Woolley", "Brian Takita"]
+    s.authors = ["Pivotal Labs", "Nate Clark", "Brian Takita", "Chad Woolley"]
     s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec,vendor}/**/*"]
     s.extensions << 'Rakefile'
 #    s.add_dependency ''

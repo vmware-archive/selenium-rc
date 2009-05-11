@@ -1,9 +1,33 @@
 module SeleniumRC
 
   class Server
+    class << self
+      def boot
+        new.boot
+      end
 
-    def self.boot
-      new.boot
+      def host
+        ENV["SELENIUM_SERVER_HOST"] || "0.0.0.0"
+      end
+
+      def port
+        ENV["SELENIUM_SERVER_PORT"] || "4444"
+      end
+
+      def timeout
+        ENV["SELENIUM_SERVER_TIMEOUT"] || 15
+      end
+
+      def service_is_running?
+        begin
+          socket = TCPSocket.new(host, port)
+          socket.close unless socket.nil?
+          true
+        rescue Errno::ECONNREFUSED,
+               Errno::EBADF           # Windows
+          false
+        end
+      end
     end
 
     def boot
@@ -13,7 +37,11 @@ module SeleniumRC
     end
 
     def start
-      remote_control.start
+      command = "java -jar \"#{jar_path}\""
+      command << " -port #{self.class.port}"
+      command << " -timeout #{self.class.timeout}"
+      puts "Running: #{command}"
+      system(command)
     end
 
     def stop_at_exit
@@ -22,34 +50,16 @@ module SeleniumRC
       end
     end
 
-    def remote_control
-      return @remote_control if @remote_control
-
-      @remote_control = ::Selenium::RemoteControl::RemoteControl.new("0.0.0.0", Webrat.configuration.selenium_server_port, 5)
-      @remote_control.jar_file = jar_path
-
-      return @remote_control
-    end
-
     def jar_path
-      File.expand_path(__FILE__ + "../../../../../vendor/selenium-server.jar")
+      File.expand_path("#{File.dirname(__FILE__)}/../../vendor/selenium-server.jar")
     end
 
     def wait
-      $stderr.print "==> Waiting for Selenium RC server on port #{Webrat.configuration.selenium_server_port}... "
-      wait_for_socket
+      $stderr.print "==> Waiting for Selenium RC server on port #{port}... "
+      wait_for_service_with_timeout
       $stderr.print "Ready!\n"
     rescue SocketError
       fail
-    end
-
-    def wait_for_socket
-      silence_stream(STDOUT) do
-        TCPSocket.wait_for_service_with_timeout \
-            :host     => (Webrat.configuration.selenium_server_address || "0.0.0.0"),
-          :port     => Webrat.configuration.selenium_server_port,
-          :timeout  => 15 # seconds
-      end
     end
 
     def fail
@@ -60,11 +70,35 @@ module SeleniumRC
     end
 
     def stop
-      silence_stream(STDOUT) do
-        ::Selenium::RemoteControl::RemoteControl.new("0.0.0.0", Webrat.configuration.selenium_server_port, 5).stop
-      end
+      Net::HTTP.get(host, '/selenium-server/driver/?cmd=shutDown', port)
     end
 
+    def host
+      self.class.host
+    end
+
+    def port
+      self.class.port
+    end
+
+    def timeout
+      self.class.timeout
+    end
+
+    def service_is_running?
+      self.class.service_is_running?
+    end
+
+    protected
+    def wait_for_service_with_timeout
+      start_time = Time.now
+
+      until self.class.service_is_running?
+        if timeout && (Time.now > (start_time + timeout))
+          raise SocketError.new("Socket did not open within #{timeout} seconds")
+        end
+      end
+    end
   end
 
 end
