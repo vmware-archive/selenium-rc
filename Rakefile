@@ -4,6 +4,7 @@ require "fileutils"
 require "open-uri"
 require "zip/zip"
 
+# TODO: Disable all rake version:* tasks because they clobber VERSION.yml
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
