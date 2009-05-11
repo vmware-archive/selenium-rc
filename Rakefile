@@ -6,7 +6,7 @@ require "fileutils"
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |s|
-    s.name = "jeweler"
+    s.name = "selenium-rc"
     s.executables = "selenium-rc"
     s.summary = "The Selenium RC Server packaged as a gem."
     s.email = "pivotallabsopensource@googlegroups.com"
