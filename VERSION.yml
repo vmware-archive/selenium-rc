@@ -1,4 +1,5 @@
 --- 
-:minor: 1
-:patch: 0
 :major: 1
+:minor: 1
+:patch: 20090112
+:jar_url: http://release.seleniumhq.org/selenium-remote-control/1.0-beta-2/selenium-remote-control-1.0-beta-2-dist.zip
