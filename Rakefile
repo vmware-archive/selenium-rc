@@ -13,7 +13,8 @@ begin
     s.homepage = "http://github.com/pivotal/selenium-rc"
     s.description = "The Selenium RC Server packaged as a gem"
     s.authors = ["Pivotal Labs", "Chad Woolley", "Brian Takita"]
-    s.files =  FileList["[A-Z]*", "{bin,generators,lib,test}/**/*"]
+    s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec,vendor}/**/*"]
+    s.extensions << 'extconf.rb'    
 #    s.add_dependency ''
   end
 rescue LoadError
