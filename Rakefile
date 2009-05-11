@@ -1,6 +1,8 @@
 require "rubygems"
 require "tmpdir"
 require "fileutils"
+require "open-uri"
+require "zip/zip"
 
 begin
   require 'jeweler'
@@ -14,7 +16,7 @@ begin
     s.authors = ["Pivotal Labs", "Nate Clark", "Brian Takita", "Chad Woolley"]
     s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec,vendor}/**/*"]
     s.extensions << 'Rakefile'
-#    s.add_dependency ''
+    s.add_dependency "rubyzip"
   end
 rescue LoadError
   puts "Jeweler, or one of its dependencies, is not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
@@ -33,14 +35,12 @@ task :download_jar_file do
   FileUtils.mkdir_p(download_dir)
   download_path = "#{download_dir}/#{File.basename(jar_url)}"
 
-  run = lambda do |cmd, error_msg|
-    puts "Running: #{cmd}"
-    system(cmd) || raise(error_msg)
+  jar_uri = URI.parse(jar_url)
+  File.open(download_path, 'wb') do |f|
+    f.write(jar_uri.open.read)
   end
-
-  run.call("wget #{jar_url} -O #{download_path}", "Downloading #{jar_url} failed")
-  Dir.chdir(File.dirname(download_path)) do
-    run.call("unzip #{download_path}", "Unzipping #{download_path} failed")
-    run.call("cp $(find . | grep selenium-server.jar) #{project_dir}/vendor", "Copying the selenium-server.jar failed")
+  Zip::ZipFile.open(download_path) do |zipfile|
+    jar_file_entry = zipfile.entries.find {|file| file.name =~ /selenium-server\.jar$/}
+    zipfile.extract(jar_file_entry, "#{project_dir}/vendor/selenium-server.jar")
   end
 end
