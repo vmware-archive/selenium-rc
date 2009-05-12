@@ -2,8 +2,8 @@ module SeleniumRC
 
   class Server
     class << self
-      def boot
-        new.boot
+      def boot(*argv)
+        new.boot(argv)
       end
 
       def host
@@ -26,16 +26,21 @@ module SeleniumRC
       end
     end
 
-    def boot
-      start
+    def boot(*argv)
+      start(argv)
       wait
       stop_at_exit
     end
 
-    def start
+    def log(string)
+      puts string
+    end
+
+    def start(*argv)
       command = "java -jar \"#{jar_path}\""
       command << " -port #{self.class.port}"
-      puts "Running: #{command}"
+      command << " #{argv.join(' ')}" if argv.length > 0
+      log "Running: #{command}"
       system(command)
     end
 
