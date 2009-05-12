@@ -11,7 +11,7 @@ describe "bin/selenium-rc" do
   end
 
   after do
-    system("lsof -i tcp:4444 | grep '(LISTEN)' | awk '{print $2}' | xargs kill -9")
+    SeleniumRC::Server.new.stop
     TCPSocket.wait_for_service_termination(:host => "0.0.0.0", :port => 4444)
   end
 
