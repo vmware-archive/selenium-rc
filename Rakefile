@@ -42,6 +42,8 @@ task :download_jar_file do
   end
   Zip::ZipFile.open(download_path) do |zipfile|
     jar_file_entry = zipfile.entries.find {|file| file.name =~ /selenium-server\.jar$/}
-    zipfile.extract(jar_file_entry, "#{project_dir}/vendor/selenium-server.jar")
+    destination = "#{project_dir}/vendor/selenium-server.jar"
+    FileUtils.rm_rf(destination)
+    zipfile.extract(jar_file_entry, destination)
   end
 end
