@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{selenium-rc}
-  s.version = "1.2.20090112"
+  s.version = "1.3.20090112"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pivotal Labs", "Nate Clark", "Brian Takita", "Chad Woolley"]
