@@ -14,10 +14,6 @@ module SeleniumRC
         ENV["SELENIUM_SERVER_PORT"] || "4444"
       end
 
-      def timeout
-        ENV["SELENIUM_SERVER_TIMEOUT"] || 15
-      end
-
       def service_is_running?
         begin
           socket = TCPSocket.new(host, port)
@@ -39,7 +35,6 @@ module SeleniumRC
     def start
       command = "java -jar \"#{jar_path}\""
       command << " -port #{self.class.port}"
-      command << " -timeout #{self.class.timeout}"
       puts "Running: #{command}"
       system(command)
     end
@@ -81,10 +76,6 @@ module SeleniumRC
       self.class.port
     end
 
-    def timeout
-      self.class.timeout
-    end
-
     def service_is_running?
       self.class.service_is_running?
     end
@@ -92,6 +83,7 @@ module SeleniumRC
     protected
     def wait_for_service_with_timeout
       start_time = Time.now
+      timeout = 15
 
       until self.class.service_is_running?
         if timeout && (Time.now > (start_time + timeout))
