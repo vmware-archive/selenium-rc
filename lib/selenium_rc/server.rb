@@ -41,7 +41,9 @@ module SeleniumRC
       command << " -port #{self.class.port}"
       command << " #{argv.join(' ')}" if argv.length > 0
       log "Running: #{command}"
-      system(command)
+      Thread.start do
+        system(command)
+      end
     end
 
     def stop_at_exit

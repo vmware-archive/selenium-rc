@@ -10,21 +10,25 @@ describe "bin/selenium-rc" do
     end
   end
 
-  after do
-    SeleniumRC::Server.new.stop
-    TCPSocket.wait_for_service_termination(:host => "0.0.0.0", :port => 4444)
-  end
-
-  it "starts the SeleniumRC server from the downloaded jar file" do
+  it "starts the SeleniumRC server from the downloaded jar file and terminates it when finished" do
+    thread = nil
     Dir.chdir(root_dir) do
-      system("bin/selenium-rc &") || raise("bin/selenium-server failed")
+      thread = Thread.start do
+        system("bin/selenium-rc") || raise("bin/selenium-server failed")
+      end
     end
 
+    timeout {SeleniumRC::Server.service_is_running?}
+    thread.kill
+    timeout {!SeleniumRC::Server.service_is_running?}
+  end
+
+  def timeout
     start_time = Time.now
-    timeout = 15
-    until SeleniumRC::Server.service_is_running?
-      if Time.now > (start_time + timeout)
-        raise SocketError.new("Socket did not open within #{timeout} seconds")
+    timeout_length = 15
+    until yield
+      if Time.now > (start_time + timeout_length)
+        raise SocketError.new("Socket did not open within #{timeout_length} seconds")
       end
     end
   end
