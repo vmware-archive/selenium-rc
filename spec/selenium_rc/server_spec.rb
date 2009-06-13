@@ -6,6 +6,7 @@ module SeleniumRC
     before do
       @server = Server.new
       stub(@server).log
+      stub(@server).fork.yields
     end
 
     describe "#start" do

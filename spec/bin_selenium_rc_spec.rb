@@ -17,9 +17,9 @@ describe "bin/selenium-rc" do
         system("bin/selenium-rc") || raise("bin/selenium-server failed")
       end
     end
-
     timeout {SeleniumRC::Server.service_is_running?}
     thread.kill
+    Lsof.kill(4444)
     timeout {!SeleniumRC::Server.service_is_running?}
   end
 

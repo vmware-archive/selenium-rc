@@ -42,7 +42,7 @@ module SeleniumRC
       command << " -port #{self.class.port}"
       command << " #{argv.join(' ')}" if argv.length > 0
       log "Running: #{command}"
-      Thread.start do
+      fork do
         system(command)
       end
     end
