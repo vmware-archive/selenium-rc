@@ -3,7 +3,9 @@ module SeleniumRC
   class Server
     class << self
       def boot(*argv)
-        new.boot(argv)
+        instance = new
+        instance.boot(argv)
+        instance
       end
 
       def host
