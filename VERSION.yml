@@ -1,5 +1,4 @@
 --- 
+:minor: 9
+:patch: 0
 :major: 1
-:minor: 8
-:patch: 20090512
-:jar_url: http://release.seleniumhq.org/selenium-remote-control/1.0.1/selenium-remote-control-1.0.1-dist.zip
