@@ -44,8 +44,14 @@ module SeleniumRC
       command << " -port #{self.class.port}"
       command << " #{argv.join(' ')}" if argv.length > 0
       log "Running: #{command}"
-      fork do
-        system(command)
+      begin
+        fork do
+          system(command)
+        end
+      rescue NotImplementedError
+        Thread.start do
+          system(command)
+        end
       end
     end
 
