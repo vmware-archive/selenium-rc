@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{selenium-rc}
-  s.version = "2.0.20090512"
+  s.version = "2.0.20090610"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pivotal Labs", "Nate Clark", "Brian Takita", "Chad Woolley"]
@@ -36,10 +36,10 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{The Selenium RC Server packaged as a gem.}
   s.test_files = [
-    "spec/selenium_rc/server_spec.rb",
-    "spec/spec_suite.rb",
     "spec/bin_selenium_rc_spec.rb",
-    "spec/spec_helper.rb"
+     "spec/selenium_rc/server_spec.rb",
+     "spec/spec_helper.rb",
+     "spec/spec_suite.rb"
   ]
 
   if s.respond_to? :specification_version then
