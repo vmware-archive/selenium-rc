@@ -1,48 +1,37 @@
 module SeleniumRC
 
   class Server
-    class << self
-      def boot(*argv)
-        instance = new
-        instance.boot(argv)
-        instance
-      end
+    attr_accessor :host
+    attr_accessor :port
+    attr_accessor :args
+    attr_accessor :timeout
 
-      def host
-        ENV["SELENIUM_SERVER_HOST"] || "0.0.0.0"
-      end
-
-      def port
-        ENV["SELENIUM_SERVER_PORT"] || "4444"
-      end
-
-      def service_is_running?
-        begin
-          socket = TCPSocket.new(host, port)
-          socket.close unless socket.nil?
-          true
-        rescue Errno::ECONNREFUSED,
-               Errno::EBADF,           # Windows
-               Errno::EADDRNOTAVAIL    # Windows
-          false
-        end
-      end
+    def self.boot(*args)
+      new(*args).boot
     end
 
-    def boot(*argv)
-      start(argv)
+    def initialize(host, port = nil, options = {})
+      @host = host
+      @port = port || 4444
+      @args = options[:args] || []
+      @timeout = options[:timeout]
+    end
+
+    def boot
+      start
       wait
       stop_at_exit
+      self
     end
 
     def log(string)
       puts string
     end
 
-    def start(*argv)
+    def start
       command = "java -jar \"#{jar_path}\""
-      command << " -port #{self.class.port}"
-      command << " #{argv.join(' ')}" if argv.length > 0
+      command << " -port #{port}"
+      command << " #{args.join(' ')}" unless args.empty?
       log "Running: #{command}"
       begin
         fork do
@@ -84,16 +73,16 @@ module SeleniumRC
       Net::HTTP.get(host, '/selenium-server/driver/?cmd=shutDownSeleniumServer', port)
     end
 
-    def host
-      self.class.host
-    end
-
-    def port
-      self.class.port
-    end
-
     def service_is_running?
-      self.class.service_is_running?
+      begin
+        socket = TCPSocket.new(host, port)
+        socket.close unless socket.nil?
+        true
+      rescue Errno::ECONNREFUSED,
+             Errno::EBADF,           # Windows
+             Errno::EADDRNOTAVAIL    # Windows
+        false
+      end
     end
 
     protected
@@ -101,7 +90,7 @@ module SeleniumRC
       start_time = Time.now
       timeout = 15
 
-      until self.class.service_is_running?
+      until service_is_running?
         if timeout && (Time.now > (start_time + timeout))
           raise SocketError.new("Socket did not open within #{timeout} seconds")
         end
