@@ -1,5 +1,5 @@
-=== selenium-rc ===
+# selenium-rc #
 
-Ruby wrapper for selenium rc jar. Bundles the selenium-rc jar and provides a binary and rake tasks to manage them.
+Ruby wrapper for the Selenium RC jar. Bundles the jar and provides a binary and Rake tasks to manage them.
 
-Selenium RC Home Page: http://seleniumhq.org/projects/remote-control/
+Selenium RC Home Page: [http://seleniumhq.org/projects/remote-control](http://seleniumhq.org/projects/remote-control)
