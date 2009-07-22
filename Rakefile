@@ -15,8 +15,7 @@ begin
     s.homepage = "http://github.com/pivotal/selenium-rc"
     s.description = "The Selenium RC Server packaged as a gem"
     s.authors = ["Pivotal Labs", "Nate Clark", "Brian Takita", "Chad Woolley"]
-    s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec}/**/*", "vendor/empty.txt"]
-    s.extensions << 'Rakefile'
+    s.files =  FileList["[A-Z]*", "{bin,generators,lib,spec}/**/*", "vendor/empty.txt", "vendor/selenium-server.jar"]
     s.add_dependency "rubyzip"
   end
 rescue LoadError
@@ -24,6 +23,13 @@ rescue LoadError
 end
 
 task :default => [:download_jar_file]
+
+desc "Builds a gem"
+task :gem do
+  Rake::Task[:download_jar_file].invoke
+  Rake::Task[:gemspec].invoke
+  sh("gem build selenium-rc.gemspec")
+end
 
 desc "Downloads and installs the SeleniumRC jar file from openqa"
 task :download_jar_file do

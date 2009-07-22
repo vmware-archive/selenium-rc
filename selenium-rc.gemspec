@@ -2,16 +2,15 @@
 
 Gem::Specification.new do |s|
   s.name = %q{selenium-rc}
-  s.version = "1.8.20090512"
+  s.version = "2.0.20090512"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pivotal Labs", "Nate Clark", "Brian Takita", "Chad Woolley"]
-  s.date = %q{2009-06-13}
+  s.date = %q{2009-07-21}
   s.default_executable = %q{selenium-rc}
   s.description = %q{The Selenium RC Server packaged as a gem}
   s.email = %q{pivotallabsopensource@googlegroups.com}
   s.executables = ["selenium-rc"]
-  s.extensions = ["Rakefile"]
   s.extra_rdoc_files = [
     "README.markdown"
   ]
@@ -27,7 +26,8 @@ Gem::Specification.new do |s|
     "spec/selenium_rc/server_spec.rb",
     "spec/spec_helper.rb",
     "spec/spec_suite.rb",
-    "vendor/empty.txt"
+    "vendor/empty.txt",
+    "vendor/selenium-server.jar"
   ]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/pivotal/selenium-rc}
