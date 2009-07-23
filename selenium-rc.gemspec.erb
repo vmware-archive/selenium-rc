@@ -26,5 +26,5 @@ Gem::Specification.new do |s|
      "spec/spec_suite.rb"
   ]
 
-  s.add_dependency "rubyzip", ">= 0"
+  s.add_dependency "selenium-client", ">= 1.2.16"
 end
