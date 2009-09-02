@@ -88,7 +88,7 @@ module SeleniumRC
     protected
     def wait_for_service_with_timeout
       start_time = Time.now
-      timeout = 15
+      timeout = 60
 
       until service_is_running?
         if timeout && (Time.now > (start_time + timeout))
