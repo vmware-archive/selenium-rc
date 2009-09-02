@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.extra_rdoc_files = ["README.markdown"]
 
-  s.files = ["CHANGES", "Rakefile", "README.markdown", "RELEASING", "Thorfile", "VERSION.yml", "bin/selenium-rc", "lib/selenium_rc", "lib/selenium_rc/server.rb", "lib/selenium_rc.rb", "spec/bin_selenium_rc_spec.rb", "spec/selenium_rc", "spec/selenium_rc/server_spec.rb", "spec/spec_helper.rb", "spec/spec_suite.rb", "vendor/empty.txt", "vendor/selenium-server.jar"]
+  s.files = ["Thorfile", "Rakefile", "README.markdown", "RELEASING", "CHANGES", "VERSION.yml", "bin/selenium-rc", "lib/selenium_rc", "lib/selenium_rc/server.rb", "lib/selenium_rc.rb", "spec/spec_suite.rb", "spec/selenium_rc", "spec/selenium_rc/server_spec.rb", "spec/bin_selenium_rc_spec.rb", "spec/spec_helper.rb", "vendor/empty.txt", "vendor/selenium-server.jar"]
   s.executables = ["selenium-rc"]
 
   s.rubygems_version = %q{1.3.4}

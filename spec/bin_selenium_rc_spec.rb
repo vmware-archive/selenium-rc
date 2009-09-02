@@ -31,7 +31,7 @@ describe "bin/selenium-rc" do
     timeout_length = 15
     until yield
       if Time.now > (start_time + timeout_length)
-        raise SocketError.new("Socket did not open within #{timeout_length} seconds")
+        raise SocketError.new("Socket did not open/close within #{timeout_length} seconds")
       end
     end
   end
