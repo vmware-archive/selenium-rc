@@ -8,7 +8,7 @@ class Joe < Thor
   end
 
   def fetch_jar
-    url = "http://selenium.googlecode.com/files/selenium-server-standalone-2.0a1.jar"
+    url = "http://selenium.googlecode.com/files/selenium-server-standalone-2.0a2.jar"
     file = File.join("tmp", File.basename(url))
 
     FileUtils.mkdir_p("tmp")
