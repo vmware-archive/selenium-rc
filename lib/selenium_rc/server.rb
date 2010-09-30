@@ -91,6 +91,7 @@ module SeleniumRC
       timeout = 60
 
       until service_is_running?
+        sleep 0.1
         if timeout && (Time.now > (start_time + timeout))
           raise SocketError.new("Socket did not open within #{timeout} seconds")
         end
