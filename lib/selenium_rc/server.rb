@@ -29,7 +29,7 @@ module SeleniumRC
     end
 
     def start
-      command = "java -jar \"#{jar_path}\""
+      command = "java -jar \"#{SERVER_JAR_PATH}\""
       command << " -port #{port}"
       command << " #{args.join(' ')}" unless args.empty?
       log "Running: #{command}"
@@ -48,10 +48,6 @@ module SeleniumRC
       at_exit do
         stop
       end
-    end
-
-    def jar_path
-      File.expand_path("#{File.dirname(__FILE__)}/../../vendor/selenium-server.jar")
     end
 
     def wait
