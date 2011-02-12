@@ -1,14 +1,7 @@
-In order to build the gem you need to have Joe installed.
-The full README is located at http://github.com/djanowski/joe,
-but if you're in a rush this is the list of things to do:
+this is the list of things to do:
 
-  $ sudo gem install rubyforge
-  $ rubyforge setup
-  $ rubyforge config
-
-  $ sudo gem install thor
-  $ thor install http://dimaion.com/joe/joe.thor
-
-And finally,
-
-  $ thor joe:release
+  $ bundle install      #=> Get yer dependencies
+  * edit Thorfile with the path to the latest Selenium Jar
+  $ thor joe:download   #=> downloads the latest Selenium Jar file
+  $ rake                #=> make sure they're green
+  $ gem build selenium-rc.gemspec

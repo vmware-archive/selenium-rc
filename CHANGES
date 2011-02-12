@@ -1,3 +1,10 @@
+2.3.0
+  Updating Selenium jar to v2.0 [b1]
+  adding Gemfile and development/test dependencies
+
+2.2.4
+  Updating Selenium jar to v2.0 [a4]
+
 1.8.20090512
   Fixed bug where bin/selenium-rc did not stay open
 

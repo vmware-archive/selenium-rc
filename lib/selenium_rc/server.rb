@@ -79,6 +79,7 @@ module SeleniumRC
         socket.close unless socket.nil?
         true
       rescue Errno::ECONNREFUSED,
+             Errno::ECONNRESET,
              Errno::EBADF,           # Windows
              Errno::EADDRNOTAVAIL    # Windows
         false

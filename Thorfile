@@ -1,13 +1,9 @@
 require "zip/zip"
 
 class Joe < Thor
-  desc "build", "builds the selenium-rc gem"
-  def build
-    fetch_jar
-  end
-
-  def fetch_jar
-    url = "http://selenium.googlecode.com/files/selenium-server-standalone-2.0a4.jar"
+  desc "download", "download the Selenium jar file from Google Code repository"
+  def download
+    url = "http://selenium.googlecode.com/files/selenium-server-standalone-2.0b1.jar"
     file = File.join("tmp", File.basename(url))
 
     FileUtils.mkdir_p("tmp")

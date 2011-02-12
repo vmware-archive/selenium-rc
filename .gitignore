@@ -1,4 +1,5 @@
 .idea
+.rvmrc
 /pkg
 /tmp
 /vendor/selenium-server.jar

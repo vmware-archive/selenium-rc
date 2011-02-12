@@ -1,9 +1,5 @@
-require "spec"
-require "spec/rake/spectask"
+require "rspec"
+require "rspec/core/rake_task"
 
+RSpec::Core::RakeTask.new(:spec)
 task :default => :spec
-
-desc "Run all examples"
-Spec::Rake::SpecTask.new("spec") do |t|
-  t.spec_files = FileList["spec/**/*_spec.rb"]
-end
