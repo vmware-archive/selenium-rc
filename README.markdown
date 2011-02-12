@@ -1,6 +1,10 @@
 # selenium-rc #
 
-_selenium-rc_ is a convenient ruby wrapper for the Selenium Standalone Server jar (formerly Selenium RC Server) packaged as a gem. This gem bundles the latest selenium-server-standalone-{version}.jar file and provides a binary and Rake tasks to manage them.
+_selenium-rc_ is a convenient ruby wrapper for the Selenium Standalone Server jar (formerly Selenium RC Server) packaged as a gem. This gem bundles the latest selenium-server-standalone-{version}.jar file and provides a binary and Ruby library to manage it.
+
+### Version ###
+
+    The current version of this gem (2.3.0) packages **Selenium Standalone Server 2.0 [b1]**
 
 ### Basic Ruby Usage ###
 
