@@ -1,7 +1,38 @@
 # selenium-rc #
 
-Ruby wrapper for the Selenium RC jar. Bundles the jar and provides a binary and Rake tasks to manage them.
+_selenium-rc_ is a convenient ruby wrapper for the Selenium Standalone Server jar (formerly Selenium RC Server) packaged as a gem. This gem bundles the latest selenium-server-standalone-{version}.jar file and provides a binary and Rake tasks to manage them.
 
-Selenium RC Home Page: [http://seleniumhq.org/projects/remote-control](http://seleniumhq.org/projects/remote-control)
+### Basic Ruby Usage ###
 
-Copyright (c) 2010 Pivotal Labs. This software is licensed under the MIT License.
+    server = SeleniumRC::Server.boot('0.0.0.0')
+    #=> Starts a Selenium Server on localhost on the default port (4444)
+
+    server = SeleniumRC::Server.boot('0.0.0.0', 8888)
+    #=> Starts a Selenium Server on localhost on port 8888
+
+    server = SeleniumRC::Server.boot('0.0.0.0', 8888, :args => ["-browserSideLog", "-suppressStupidness"])
+    #=> Starts a Selenium Server on localhost on port 8888 and passes arbitrary options to Selenium
+
+    server.stop
+    #=> Stops the running Selenium Server
+
+### Basic Command Line Usage ###
+
+    $ selenium-rc
+    #=> Starts a Selenium Server on localhost and the default port (4444)
+
+    $ export SELENIUM_SERVER_PORT=8888
+    $ selenium-rc
+    #=> Starts a Selenium Server on localhost on port 8888
+
+### License ###
+This software redistributes the Selenium Standalone Server in an *unmodified* form. The Selenium Standalone Server is licensed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+
+All other software contained within is licensed under the MIT License. See the MIT.LICENSE file in this project for details
+
+### Links & More Info ###
+[SeleniumHQ](http://seleniumhq.org/)
+[Selenium Project on Google Code](http://code.google.com/p/selenium/)
+[Pivotal Labs](http://pivotallabs.com)
+
+Copyright (c) 2010-2011 Pivotal Labs. This software is licensed under the MIT License.

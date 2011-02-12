@@ -6,7 +6,7 @@ describe "bin/selenium-rc" do
     dir = File.dirname(__FILE__)
     @root_dir = File.expand_path("#{dir}/..")
     unless File.exists?("#{root_dir}/vendor/selenium-server.jar")
-      raise "vendor/selenium-server.jar does not exist. Try running `rake download_jar_file` to install the jar file."
+      raise "vendor/selenium-server.jar does not exist. Try running `thor joe:download` to install the jar file."
     end
   end
 
