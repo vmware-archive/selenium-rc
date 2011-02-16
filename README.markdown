@@ -8,14 +8,17 @@ The current version of this gem (2.3.0) packages **Selenium Standalone Server 2.
 
 ### Basic Ruby Usage ###
 
-    server = SeleniumRC::Server.boot('0.0.0.0')
-    #=> Starts a Selenium Server on localhost on the default port (4444)
+    server = SeleniumRC::Server.boot('localhost')
+    #=> Starts a Selenium Server accessible via http://localhost:4444 (the default port)
 
-    server = SeleniumRC::Server.boot('0.0.0.0', 8888)
-    #=> Starts a Selenium Server on localhost on port 8888
+    server = SeleniumRC::Server.boot('localhost', 8888)
+    #=> Starts a Selenium Server accessible via http://localhost:8888
 
-    server = SeleniumRC::Server.boot('0.0.0.0', 8888, :args => ["-browserSideLog", "-suppressStupidness"])
-    #=> Starts a Selenium Server on localhost on port 8888 and passes arbitrary options to Selenium
+    server = SeleniumRC::Server.boot('localhost', 8888, :args => ["-browserSideLog", "-suppressStupidness"])
+    #=> Starts a Selenium Server accessible via http://localhost:8888 and passes arbitrary options to Selenium
+
+    server = SeleniumRC::Server.boot('localhost', 8888, :timeout => 120)
+    #=> Starts a Selenium Server accessible via http://localhost:8888 and waits 120 seconds before timing out
 
     server.stop
     #=> Stops the running Selenium Server
@@ -30,7 +33,8 @@ The current version of this gem (2.3.0) packages **Selenium Standalone Server 2.
     #=> Starts a Selenium Server on localhost on port 8888
 
 ### License ###
-This software redistributes the Selenium Standalone Server in an *unmodified* form. The Selenium Standalone Server is licensed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+This software redistributes the Selenium Standalone Server (selenium-server.jar) in an *unmodified* form.
+The Selenium Server is licensed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 All other software contained within is licensed under the MIT License. See the MIT.LICENSE file in this project for details
 

@@ -1,6 +1,9 @@
 2.3.0
   Updating Selenium jar to v2.0 [b1]
+  fixes bug on some Linux machines where server would not actually be ready for connections even though it was reported as ready
+  renaming library to the same name as the gem ('selenium-rc')
   adding Gemfile and development/test dependencies
+  adding more detailed documentation
 
 2.2.4
   Updating Selenium jar to v2.0 [a4]
