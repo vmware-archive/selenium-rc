@@ -82,6 +82,7 @@ module SeleniumRC
     def wait_for_service_with_timeout
       start_time = Time.now
       until ready?
+        sleep 0.1
         if @timeout && (Time.now > (start_time + @timeout))
           raise ServerNotStarted.new("Selenium Server was not ready for connections after #{@timeout} seconds")
         end
