@@ -2,6 +2,7 @@
   Updating Selenium jar to v2.0 [b1]
   fixes bug on some Linux machines where server would not actually be ready for connections even though it was reported as ready
   renaming library to the same name as the gem ('selenium-rc')
+  exposes the selenium-server.jar path as a class method (SeleniumRC::Server.jar_path)
   adding Gemfile and development/test dependencies
   adding more detailed documentation
 

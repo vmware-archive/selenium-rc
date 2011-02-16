@@ -6,8 +6,14 @@ module SeleniumRC
     attr_accessor :args
     attr_accessor :timeout
 
-    def self.boot(*args)
-      new(*args).boot
+    class << self
+      def boot(*args)
+        new(*args).boot
+      end
+
+      def jar_path
+        File.expand_path("#{File.dirname(__FILE__)}/../../vendor/selenium-server.jar")
+      end
     end
 
     def initialize(host, port = nil, options = {})
@@ -25,7 +31,7 @@ module SeleniumRC
     end
 
     def start
-      command = "java -jar \"#{jar_path}\""
+      command = "java -jar \"#{self.class.jar_path}\""
       command << " -port #{port}"
       command << " #{args.join(' ')}" unless args.empty?
       begin
@@ -38,10 +44,6 @@ module SeleniumRC
           system(command)
         end
       end
-    end
-
-    def jar_path
-      File.expand_path("#{File.dirname(__FILE__)}/../../vendor/selenium-server.jar")
     end
 
     def wait
@@ -66,7 +68,7 @@ module SeleniumRC
     def ready?
       begin
         selenium_command('testComplete') == 'OK'
-      rescue Errno::ECONNREFUSED, Errno::ECONNREFUSED, Errno::EPIPE, Net::HTTPBadResponse
+      rescue Errno::ECONNRESET, Errno::ECONNREFUSED, Errno::EPIPE, Net::HTTPBadResponse
         false
       end
     end

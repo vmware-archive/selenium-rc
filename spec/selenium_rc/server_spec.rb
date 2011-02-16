@@ -36,7 +36,7 @@ describe SeleniumRC::Server do
       server = new_server("0.0.0.0", 5555)
       expected_command = %Q{java -jar "/path/to/the.jar" -port 5555}
       mock(server).system(expected_command)
-      mock(server).jar_path {"/path/to/the.jar"}
+      mock(SeleniumRC::Server).jar_path {"/path/to/the.jar"}
       server.start
     end
 
@@ -45,7 +45,7 @@ describe SeleniumRC::Server do
         server = new_server("0.0.0.0", 4444, :args => ["-browserSideLog", "-suppressStupidness"])
         expected_command = %Q{java -jar "/path/to/the.jar" -port 4444 -browserSideLog -suppressStupidness}
         mock(server).system(expected_command)
-        mock(server).jar_path {"/path/to/the.jar"}
+        mock(SeleniumRC::Server).jar_path {"/path/to/the.jar"}
         server.start
       end
     end
