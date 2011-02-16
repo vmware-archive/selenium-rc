@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.rdoc_options        = ["--charset=UTF-8"]
   s.extra_rdoc_files    = ["README.markdown"]
 
-  s.files               = ["README.markdown", "CHANGES", "bin/selenium-rc", "lib/selenium_rc", "lib/selenium_rc/server.rb", "lib/selenium_rc.rb", "spec/spec_suite.rb", "spec/selenium_rc", "spec/selenium_rc/server_spec.rb", "spec/bin_selenium_rc_spec.rb", "spec/spec_helper.rb", "vendor/selenium-server.jar"]
+  s.files               = `git ls-files`.split("\n").unshift('vendor/selenium-server.jar')
   s.executables         = ["selenium-rc"]
   s.test_files          = `git ls-files -- spec/*`.split("\n")
 
@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'thor'
   s.add_development_dependency 'lsof'
   s.add_development_dependency 'rubyzip'
+  s.add_development_dependency 'gem-release'
 end

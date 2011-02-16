@@ -20,10 +20,10 @@ describe "bin/selenium-rc" do
 
     server = SeleniumRC::Server.new("0.0.0.0")
 
-    timeout {server.service_is_running?}
+    timeout {server.ready?}
     thread.kill
     Lsof.kill(4444)
-    timeout {!server.service_is_running?}
+    timeout {!server.ready?}
   end
 
   def timeout

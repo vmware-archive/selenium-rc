@@ -47,6 +47,7 @@ module SeleniumRC
     def stop_at_exit
       at_exit do
         stop
+        exit
       end
     end
 
@@ -73,25 +74,21 @@ module SeleniumRC
       Net::HTTP.get(host, '/selenium-server/driver/?cmd=shutDownSeleniumServer', port)
     end
 
-    def service_is_running?
+    def ready?
       begin
-        socket = TCPSocket.new(host, port)
-        socket.close unless socket.nil?
-        true
-      rescue Errno::ECONNREFUSED,
-             Errno::ECONNRESET,
-             Errno::EBADF,           # Windows
-             Errno::EADDRNOTAVAIL    # Windows
+        Net::HTTP.get(host, '/selenium-server/driver/?cmd=testComplete', port) == 'OK'
+      rescue Errno::ECONNREFUSED, Net::HTTPBadResponse
         false
       end
     end
 
     protected
+
     def wait_for_service_with_timeout
       start_time = Time.now
       timeout = 60
 
-      until service_is_running?
+      until ready?
         if timeout && (Time.now > (start_time + timeout))
           raise SocketError.new("Socket did not open within #{timeout} seconds")
         end
