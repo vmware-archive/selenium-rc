@@ -56,7 +56,7 @@ module SeleniumRC
     end
 
     def wait
-      $stderr.print "==> Waiting for Selenium RC server on port #{port}... "
+      $stderr.print "==> Waiting for Selenium Server on port #{port}... "
       wait_for_service_with_timeout
       $stderr.print "Ready!\n"
     rescue SocketError
@@ -66,7 +66,7 @@ module SeleniumRC
     def fail
       $stderr.puts
       $stderr.puts
-      $stderr.puts "==> Failed to boot the Selenium RC server... exiting!"
+      $stderr.puts "==> Failed to boot the Selenium Server... exiting!"
       exit
     end
 

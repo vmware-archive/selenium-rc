@@ -35,8 +35,11 @@ This software redistributes the Selenium Standalone Server in an *unmodified* fo
 All other software contained within is licensed under the MIT License. See the MIT.LICENSE file in this project for details
 
 ### Links & More Info ###
+
 [SeleniumHQ](http://seleniumhq.org/)
+
 [Selenium Project on Google Code](http://code.google.com/p/selenium/)
+
 [Pivotal Labs](http://pivotallabs.com)
 
 Copyright (c) 2010-2011 Pivotal Labs. This software is licensed under the MIT License.

@@ -1,3 +1,2 @@
-dir = File.dirname(__FILE__)
-require "#{dir}/selenium_rc/server"
-require "net/http"
+warn '[DEPRECATION] the library for selenium-rc has been changed to \'selenium-rc.rb\' instead of \'selenium_rc.rb\'. Please update your `require` statements, or use Bundler to automatically require the correct library.'
+require 'selenium-rc'

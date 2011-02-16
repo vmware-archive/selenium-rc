@@ -1,10 +1,8 @@
-require File.expand_path("#{File.dirname(__FILE__)}/spec_helper")
+require 'spec_helper'
 
 describe "bin/selenium-rc" do
-  attr_reader :root_dir
+  let(:root_dir) { File.expand_path("#{File.dirname(__FILE__)}/..") }
   before do
-    dir = File.dirname(__FILE__)
-    @root_dir = File.expand_path("#{dir}/..")
     unless File.exists?("#{root_dir}/vendor/selenium-server.jar")
       raise "vendor/selenium-server.jar does not exist. Try running `thor joe:download` to install the jar file."
     end
