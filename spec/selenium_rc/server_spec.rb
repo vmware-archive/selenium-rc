@@ -9,6 +9,28 @@ describe SeleniumRC::Server do
     server
   end
 
+  describe ".boot" do
+    let(:server) { new_server('localhost', 5555, {:timeout => 1}) }
+
+    before do
+      mock(server).start { true }
+    end
+
+    context "when the selenium server starts successfully" do
+      it "returns an instance of the server" do
+        mock(server).ready? { true }
+        server.boot.should == server
+      end
+    end
+
+    context "when the selenium server fails to start" do
+      it "raises an exception after 60 seconds" do
+        mock(server).ready?.any_number_of_times { false }
+        expect { server.boot.should }.to raise_error(SystemExit)
+      end
+    end
+  end
+
   describe "#start" do
     it "launches java with the jar file and port" do
       server = new_server("0.0.0.0", 5555)

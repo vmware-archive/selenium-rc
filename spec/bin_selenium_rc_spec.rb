@@ -18,18 +18,18 @@ describe "bin/selenium-rc" do
 
     server = SeleniumRC::Server.new("0.0.0.0")
 
-    timeout {server.ready?}
+    timeout { server.ready? }
     thread.kill
     Lsof.kill(4444)
-    timeout {!server.ready?}
+    timeout { !server.ready? }
   end
 
   def timeout
     start_time = Time.now
-    timeout_length = 15
+    timeout = 15
     until yield
-      if Time.now > (start_time + timeout_length)
-        raise SocketError.new("Socket did not open/close within #{timeout_length} seconds")
+      if Time.now > (start_time + timeout)
+        raise SeleniumRC::ServerNotStarted.new("Selenium Server was not ready for connections after #{timeout} seconds")
       end
     end
   end

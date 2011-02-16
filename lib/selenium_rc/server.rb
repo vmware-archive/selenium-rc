@@ -14,40 +14,29 @@ module SeleniumRC
       @host = host
       @port = port || 4444
       @args = options[:args] || []
-      @timeout = options[:timeout]
+      @timeout = options[:timeout] || 60
     end
 
     def boot
       start
       wait
-      stop_at_exit
+      at_exit { stop }
       self
-    end
-
-    def log(string)
-      puts string
     end
 
     def start
       command = "java -jar \"#{jar_path}\""
       command << " -port #{port}"
       command << " #{args.join(' ')}" unless args.empty?
-      log "Running: #{command}"
       begin
         fork do
           system(command)
+          at_exit { exit!(0) }
         end
       rescue NotImplementedError
         Thread.start do
           system(command)
         end
-      end
-    end
-
-    def stop_at_exit
-      at_exit do
-        stop
-        exit
       end
     end
 
@@ -59,7 +48,7 @@ module SeleniumRC
       $stderr.print "==> Waiting for Selenium Server on port #{port}... "
       wait_for_service_with_timeout
       $stderr.print "Ready!\n"
-    rescue SocketError
+    rescue ServerNotStarted
       fail
     end
 
@@ -71,29 +60,33 @@ module SeleniumRC
     end
 
     def stop
-      Net::HTTP.get(host, '/selenium-server/driver/?cmd=shutDownSeleniumServer', port)
+      selenium_command('shutDownSeleniumServer')
     end
 
     def ready?
       begin
-        Net::HTTP.get(host, '/selenium-server/driver/?cmd=testComplete', port) == 'OK'
-      rescue Errno::ECONNREFUSED, Net::HTTPBadResponse
+        selenium_command('testComplete') == 'OK'
+      rescue Errno::ECONNREFUSED, Errno::ECONNREFUSED, Errno::EPIPE, Net::HTTPBadResponse
         false
       end
     end
 
     protected
 
+    def selenium_command(command)
+      Net::HTTP.get(host, "/selenium-server/driver/?cmd=#{command}", port)
+    end
+
     def wait_for_service_with_timeout
       start_time = Time.now
-      timeout = 60
-
       until ready?
-        if timeout && (Time.now > (start_time + timeout))
-          raise SocketError.new("Socket did not open within #{timeout} seconds")
+        if @timeout && (Time.now > (start_time + @timeout))
+          raise ServerNotStarted.new("Selenium Server was not ready for connections after #{@timeout} seconds")
         end
       end
     end
   end
 
+  class ServerNotStarted < Exception
+  end
 end
