@@ -1,3 +1,6 @@
+2.3.1
+  Adds a 0.1 second sleep between attempts to check if Selenium is ready for connections
+
 2.3.0
   Updating Selenium jar to v2.0 [b1]
   fixes bug on some Linux machines where server would not actually be ready for connections even though it was reported as ready
