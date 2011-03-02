@@ -1,3 +1,6 @@
+2.3.2
+  Updating Selenium jar to v2.0 [b2]
+
 2.3.1
   Adds a 0.1 second sleep between attempts to check if Selenium is ready for connections
 

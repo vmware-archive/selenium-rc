@@ -4,7 +4,7 @@ _selenium-rc_ is a convenient ruby wrapper for the Selenium Standalone Server ja
 
 ### Version ###
 
-The current version of this gem (2.3.1) packages **Selenium Standalone Server 2.0 [b1]**
+The current version of this gem (2.3.2) packages **Selenium Standalone Server 2.0 [b2]**
 
 ### Basic Ruby Usage ###
 
