@@ -3,3 +3,5 @@
 /pkg
 /tmp
 /vendor/selenium-server.jar
+.bundle
+selenium-rc-*.gem

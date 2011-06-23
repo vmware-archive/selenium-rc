@@ -3,7 +3,7 @@ require "zip/zip"
 class Joe < Thor
   desc "download", "download the Selenium jar file from Google Code repository"
   def download
-    url = "http://selenium.googlecode.com/files/selenium-server-standalone-2.0b2.jar"
+    url = "http://selenium.googlecode.com/files/selenium-server-standalone-2.0rc3.jar"
     file = File.join("tmp", File.basename(url))
 
     FileUtils.mkdir_p("tmp")

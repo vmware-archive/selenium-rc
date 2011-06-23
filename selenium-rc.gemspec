@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name                = %q{selenium-rc}
-  s.version             = "2.3.2"
+  s.version             = "2.4.0"
   s.platform            = Gem::Platform::RUBY
 
   s.description         = %q{The Selenium Server packaged as a gem}
