@@ -9,4 +9,5 @@ this is the list of things to do:
   $ manually edit the README.markdown to update the version of the gem
   $ manually edit the README.markdown to update the version of the new selenium-rc jar (which you pasted in Thorfile)
   $ git commit everything thus far
-  $ gem build selenium-rc.gemspec
+  $ git push
+  $ gem release --tag
