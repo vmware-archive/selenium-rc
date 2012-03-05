@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    selenium-rc (2.3.2)
+    selenium-rc (2.20.0)
       selenium-client (>= 1.2.18)
 
 GEM
