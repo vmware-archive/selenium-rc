@@ -1,9 +1,10 @@
 this is the list of things to do:
 
+  $ gem install bundler
   $ bundle install      #=> Get yer dependencies
   * edit Thorfile with the path to the latest Selenium Jar
-  $ thor joe:download   #=> downloads the latest Selenium Jar file
-  $ rake                #=> make sure they're green
+  $ bundle exec thor joe:download   #=> downloads the latest Selenium Jar file
+  $ bundle exec rake    #=> make sure they're green
   $ manually edit lib/selenium-rc/version.rb with the desired version because gem-release is too dumb to do it right
   $ manually edit selenium-rc.gemspec to contain the version # can't gem-release do this for us???
   $ manually edit the README.markdown to update the version of the gem
