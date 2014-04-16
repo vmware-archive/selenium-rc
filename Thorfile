@@ -1,5 +1,3 @@
-require "zip/zip"
-
 class Joe < Thor
   desc "download", "download the Selenium jar file from Google Code repository"
   def download
