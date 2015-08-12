@@ -1,3 +1,3 @@
 module SeleniumRC
-  VERSION = '2.39.0'
+  VERSION = '2.47.1'
 end
