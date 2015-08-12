@@ -1,15 +1,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name                = %q{selenium-rc}
+  s.name                = %q{selenium-rc-latest}
   s.version             = "2.47.1"
   s.platform            = Gem::Platform::RUBY
 
   s.description         = %q{The Selenium Server packaged as a gem}
   s.summary             = %q{The Selenium Server packaged as a gem}
   s.authors             = ["Pivotal Labs, Inc.", "Nate Clark", "Brian Takita", "Chad Woolley", "Matthew Kocher"]
-  s.email               = %q{pivotallabsopensource@googlegroups.com}
-  s.homepage            = %q{http://github.com/pivotal/selenium-rc}
+  s.homepage            = %q{https://github.com/ThoughtWorksStudios/selenium-rc}
 
   s.rdoc_options        = ["--charset=UTF-8"]
   s.extra_rdoc_files    = ["README.markdown"]
