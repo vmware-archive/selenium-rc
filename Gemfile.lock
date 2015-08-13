@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     selenium-rc-latest (2.47.1)
-      selenium-client (>= 1.2.18)
 
 GEM
   remote: http://rubygems.org/
@@ -21,7 +20,6 @@ GEM
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.5.0)
     rubyzip (0.9.4)
-    selenium-client (1.2.18)
     thor (0.14.6)
 
 PLATFORMS

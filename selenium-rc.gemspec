@@ -19,7 +19,6 @@ Gem::Specification.new do |s|
   s.test_files          = `git ls-files -- spec/*`.split("\n")
   s.require_paths       = %w{lib}
 
-  s.add_dependency "selenium-client", ">= 1.2.18"
   s.add_development_dependency 'rspec', '>= 2.5.0'
   s.add_development_dependency 'rr'
   s.add_development_dependency 'thor'
