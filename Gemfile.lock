@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    selenium-rc (2.47.1)
+    selenium-rc-latest (2.47.1)
       selenium-client (>= 1.2.18)
 
 GEM
@@ -34,7 +34,7 @@ DEPENDENCIES
   rr
   rspec (>= 2.5.0)
   rubyzip
-  selenium-rc!
+  selenium-rc-latest!
   thor
 
 BUNDLED WITH
